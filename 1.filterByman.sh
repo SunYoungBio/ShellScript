@@ -1,3 +1,4 @@
+#!/usr/bin/sh
 for i in `ls *_somatic`
 do
 	awk 'NR==FNR{a[$1"\t"$2]=$3;next}; a[$1"\t"$2]<$7{print $0"\t"a[$1"\t"$2]}'\
