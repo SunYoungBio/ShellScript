@@ -1,0 +1,15 @@
+  1. 计算每5行的平均数：
+	 awk 'BEGIN{SUM=0}{SUM=$4+SUM;if(NR%5==0){printf $2"\t"SUM/5;SUM=0;}print ""}'
+	2. 替换其中一列：awk  'BEGIN{FS=OFS="\t"}{$3="."}1' 9.xpclr.b36.snp.no.space > 9.xpclr.b36.snp.no.cM
+	3. 计算：
+	  1、求和cat data|awk '{sum+=$1} END {print "Sum = ", sum}'  
+	  2、求平均cat data|awk '{sum+=$1} END {print "Average = ", sum/NR}'  
+	  3、求最大值cat data|awk 'BEGIN {max = 0} {if ($1+0>max+0) max=$1 fi} END {print "Max=", max}'
+	  4、求最小值（min的初始值设置一个超大数即可）awk 'BEGIN {min = 1999999} {if ($1+0<min+0) min=$1 fi} END {print "Min=", min}'
+	4. 类似vlookup的命令：awk 'NR==FNR{a[$1"\t"$2]=$0;next}{print $0"\t"a[$1"\t"$2]}'  file1 file2 #前面大括号内所有变量都是第一个文件的，第二个大括号内的变量$0,$1,$2为第二个文件的。数组a为第一个文件。
+	5. 查看家目录文件大小：du -h --max-depth=1
+	6. awk调用shell变量，需要用"'$shell_var'"扩住变量来使用;而sed用''即可
+	7. while read in ; do echo $in ; cat $in ; done    #read用于从标准输入读取数值。
+	8. ls *somatic | while read file; do cut -f 7 $file | sed '1i '$file'' | paste -s  >> single_sample_MSI_1kSite_comentropy.txt ; done    #paste 按行粘贴，以及接管道符
+	9. head -n1 test | awk '{print NF}'    #获取文件列数
+ 10. for i in `seq 1 7`; do cut -f $i test | paste -s ; done    #转置操作！！！
