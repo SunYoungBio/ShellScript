@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+for i in `find -name 5_DMR_Group_Specificity_overlap_gff.bed`
+	do
+	j=${i##*./}
+	k=${j%%/SMART*}
+	l=$(echo $k | sed 's/\//\_/')
+	p=${i%%5_*}
+	cp $i ${l}_overlap_gff.txt
+done
